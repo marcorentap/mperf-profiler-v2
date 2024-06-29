@@ -35,6 +35,9 @@ foreach(BACKEND IN LISTS BACKENDS)
   )
 endforeach()
 
+message("MPerf host architecture: ${MPERF_HOST_ARCH}")
+message("MPerf enabled backends: ${BACKENDS}")
+
 # Install lib and headers
 install(
   TARGETS MPerf ${BACKENDS}
