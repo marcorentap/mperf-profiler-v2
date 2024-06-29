@@ -12,13 +12,21 @@ target_include_directories(MPerf SYSTEM
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
+# Host Architecture
+set(MPERF_HOST_ARCH "" CACHE STRING "Host device architecture")
+string(TOUPPER "${MPERF_HOST_ARCH}" MPERF_HOST_ARCH)
+string(REGEX MATCH "INTELSKL|INTELSKX|INTELKNL" MPERF_HOST_ARCH "${MPERF_HOST_ARCH}")
+if ("${MPERF_HOST_ARCH}" STREQUAL "")
+  message(FATAL_ERROR "MPERF_HOST_ARCH not defined or invalid")
+endif()
+add_compile_definitions(MPERF_HOST_ARCH_${MPERF_HOST_ARCH})
+
 set(BACKENDS)
 
 # MPerf backends
 add_subdirectory(backends/cppchrono)
 
 target_link_libraries(MPerf ${BACKENDS})
-message("Backends: ${BACKENDS}")
 foreach(BACKEND IN LISTS BACKENDS)
   target_include_directories(${BACKEND} SYSTEM 
     PUBLIC
