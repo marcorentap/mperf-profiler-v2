@@ -15,7 +15,9 @@ _Measure::_Measure(std::string label) {
   startTime = cppclock::now();
 }
 
-void _Measure::Reset() {}
+void _Measure::Reset() {
+  startTime = cppclock::now();
+}
 
 void _Measure::DoMeasure() { stopTime = cppclock::now(); }
 
