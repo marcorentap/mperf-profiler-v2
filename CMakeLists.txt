@@ -25,6 +25,7 @@ set(BACKENDS)
 
 # MPerf backends
 add_subdirectory(backends/cppchrono)
+add_subdirectory(backends/libpfm4)
 
 target_link_libraries(MPerf ${BACKENDS})
 foreach(BACKEND IN LISTS BACKENDS)
