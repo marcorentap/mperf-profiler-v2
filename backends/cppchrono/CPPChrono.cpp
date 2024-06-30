@@ -30,8 +30,6 @@ json _Measure::GetJSON() {
 
 Measure *CPPChrono::MakeMeasure(const std::string label) {
   return new _Measure(label);
-  Measure *m = new _Measure(label);
-  return m;
 }
 
 Measure *CPPChrono::MakeMeasure(const std::vector<std::string> labels) {
