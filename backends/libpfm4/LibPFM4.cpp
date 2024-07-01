@@ -36,21 +36,21 @@ _Measure::_Measure(std::string label) : label(label) {
   attr.exclude_idle = 1;
   fd = perf_event_open(&attr, 0, -1, -1, 0);
   if (fd < 0) {
-    auto err = std::format("cannot open perf event for {}", label);
+    auto err = std::format("cannot open perf event for {}. {}", label, strerror(errno));
     throw std::invalid_argument(err);
   }
 }
 
 void _Measure::Reset() {
   if (ioctl(fd, PERF_EVENT_IOC_RESET) < 0) {
-    auto err = std::format("cannot reset measure {}", label);
+    auto err = std::format("cannot reset measure {}. {}", label, strerror(errno));
     throw std::invalid_argument(err);
   }
 }
 
 void _Measure::DoMeasure() {
   if (read(fd, &result, sizeof(result)) < 0) {
-    auto err = std::format("cannot read measure {}", label);
+    auto err = std::format("cannot read measure {}. {}", label, strerror(errno));
     throw std::invalid_argument(err);
   }
 }
