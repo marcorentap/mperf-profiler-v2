@@ -18,6 +18,9 @@ public:
 };
 
 class Backend {
+  const std::string name;
+  const std::vector<std::string> labels;
+  public:
   virtual Measure *MakeMeasure(const std::string label) = 0;
   virtual Measure *MakeMeasure(const std::vector<std::string> labels) = 0;
 };

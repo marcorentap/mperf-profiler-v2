@@ -25,6 +25,8 @@ public:
   };
 
 public:
+  const std::string name = "CPPChrono";
+  const std::vector<std::string> labels = {"time"};
   Measure *MakeMeasure(const std::string label);
   Measure *MakeMeasure(const std::vector<std::string> labels);
 };
